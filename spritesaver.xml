@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<screensaver name="spritesaver" _label="SpriteSaver">
+
+  <command arg="--root"/>
+
+  <number id="speed" type="slider" arg="--speed %"
+          _label="Speed (pixels/frame)" _low-label="Slow" _high-label="Fast"
+          low="1" high="10" default="3"/>
+
+  <number id="animdelay" type="slider" arg="--animation-delay %"
+          _label="Animation Delay (frames)" _low-label="Fast" _high-label="Slow"
+          low="1" high="5" default="2"/>
+
+  <xscreensaver-updater />
+
+  <_description>
+A minimal screensaver to display animated sprites.
+  </_description>
+</screensaver>
