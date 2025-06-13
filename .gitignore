@@ -1,6 +1,5 @@
-./sprites/spritesaver
-./sprites/spritesaver.o
+sprites/spritesaver
+sprites/spritesaver.o
 sprites/*/
 
-./trash
 .DS_Store
