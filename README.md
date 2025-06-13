@@ -19,7 +19,7 @@ SpriteSaver is a screensaver for displaying animated sprites. It is designed to 
 
 # Installation
 
-> [!NOTE]Compatibility  
+> [!NOTE]  
 > This software was developed and tested on **Ubuntu 22.04**. Support for other platforms is listed in [Future Features](#future-features).
 
 First, install XScreenSaver and [FFmpeg](https://ffmpeg.org/) if they are not installed already,
