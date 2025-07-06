@@ -12,7 +12,7 @@ SpriteSaver offers customization through settings. These can be set in the XScre
 
 The movement speed of the sprite in pixels per frame. Ranges from 1 (slow) to 10 (fast). Defaults to 3.
 
-| 3 pixels/second | 6 pixels/second |
+| 3 pixels/frame | 6 pixels/frame |
 |:---------------:|:---------------:|
 | ![3 speed](gallery/settings-comparison/aerodactyl_3speed_2delay.gif) | ![6 speed](gallery/settings-comparison/aerodactyl_6speed_2delay.gif) |
 
