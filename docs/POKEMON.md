@@ -59,7 +59,7 @@ spritesaver/
 
 To preview the screensaver, either use the XScreenSaver GUI or run the binary directly,
 ```
-./spritesaver --speed [1-10] --animation-delay [1-5]
+./sprites/spritesaver --speed [1-10] --animation-delay [1-5]
 ```
 
 For more documentation on the settings, see [SETTINGS.md](SETTINGS.md).
