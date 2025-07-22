@@ -31,7 +31,7 @@ spritesaver/
 
 Then, run `autobuild.sh` from the `spritesaver` directory,
 ```
-sudo ./autobuild.sh sprites/sprite_name/left.gif sprites/sprite_name/right.gif
+sudo ./autobuild.sh sprites/aerodactyl/aerodactyl_front.gif sprites/aerodactyl/aerodactyl_back.gif
 ```
 
 This will generate the sprite images, sprite headers, and compile and install the binary,
