@@ -29,13 +29,13 @@ sudo apt install xscreensaver ffmpeg
 
 Then clone and run `configure.sh`. This **only needs to be run once** as long as XScreenSaver is not uninstalled.
 ```
-git clone git@github.com:henrynoyes/spritesaver.git
+git clone https://github.com/henrynoyes/spritesaver.git
 cd spritesaver && sudo ./configure.sh
 ```
 
 ### Importing Sprites
 
-Find a pair of sprites in GIF format and place them in a new directory inside `sprites/`. Make sure both GIFs contain the **same number of frames**.
+Find a pair of sprites in GIF format and place them in a new directory inside `sprites/`.
 
 > [!TIP]
 > For detailed instructions on installing Pokémon sprites, see [POKEMON.md](docs/POKEMON.md).
