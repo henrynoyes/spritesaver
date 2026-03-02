@@ -31,8 +31,8 @@ struct state {
   int dx, dy;
   int speed;
   
-  PM left_frames[NUM_FRAMES];
-  PM right_frames[NUM_FRAMES];
+  PM left_frames[NUM_LEFT_FRAMES];
+  PM right_frames[NUM_RIGHT_FRAMES];
   int current_frame;
   int animation_delay;
   int animation_counter;
@@ -86,42 +86,42 @@ load_sprite_frames(struct state *st)
   
   XGetWindowAttributes(st->dpy, st->window, &xgwa);
   
-  /* load frames */
-  for (i = 0; i < NUM_FRAMES; i++) {
-    Pixmap mask_left = 0, mask_right = 0;
+  /* load left frames */
+  for (i = 0; i < NUM_LEFT_FRAMES; i++) {
+    Pixmap mask = 0;
+    st->left_frames[i].p = image_data_to_pixmap(st->dpy, st->window,
+                                                left_frame_data[i].data,
+                                                left_frame_data[i].size,
+                                                &st->left_sprite_w, &st->left_sprite_h, &mask);
+    st->left_frames[i].m = mask;
+  }
 
-    Pixmap pixmap_left = image_data_to_pixmap(st->dpy, st->window,
-                                              left_frame_data[i].data,
-                                              left_frame_data[i].size,
-                                              &st->left_sprite_w, &st->left_sprite_h, &mask_left);
-    st->left_frames[i].p = pixmap_left;
-    st->left_frames[i].m = mask_left;
-
-    Pixmap pixmap_right = image_data_to_pixmap(st->dpy, st->window,
-                                               right_frame_data[i].data,
-                                               right_frame_data[i].size,
-                                               &st->right_sprite_w, &st->right_sprite_h, &mask_right);
-    st->right_frames[i].p = pixmap_right;
-    st->right_frames[i].m = mask_right;
-}
+  /* load right frames */
+  for (i = 0; i < NUM_RIGHT_FRAMES; i++) {
+    Pixmap mask = 0;
+    st->right_frames[i].p = image_data_to_pixmap(st->dpy, st->window,
+                                                 right_frame_data[i].data,
+                                                 right_frame_data[i].size,
+                                                 &st->right_sprite_w, &st->right_sprite_h, &mask);
+    st->right_frames[i].m = mask;
+  }
 
   /* double sprites for high-res displays */
   if (xgwa.width > 2560 || xgwa.height > 2560) {
-    for (i = 0; i < NUM_FRAMES; i++) {
-      
+    for (i = 0; i < NUM_LEFT_FRAMES; i++) {
       st->left_frames[i].p = double_pixmap(st->dpy, xgwa.visual, xgwa.depth,
                                            st->left_frames[i].p, st->left_sprite_w, st->left_sprite_h);
       st->left_frames[i].m = double_pixmap(st->dpy, xgwa.visual, 1,
                                            st->left_frames[i].m, st->left_sprite_w, st->left_sprite_h);
+    }
+    for (i = 0; i < NUM_RIGHT_FRAMES; i++) {
       st->right_frames[i].p = double_pixmap(st->dpy, xgwa.visual, xgwa.depth,
                                             st->right_frames[i].p, st->right_sprite_w, st->right_sprite_h);
       st->right_frames[i].m = double_pixmap(st->dpy, xgwa.visual, 1,
                                             st->right_frames[i].m, st->right_sprite_w, st->right_sprite_h);
     }
-    st->left_sprite_w *= 2;
-    st->left_sprite_h *= 2;
-    st->right_sprite_w *= 2;
-    st->right_sprite_h *= 2;
+    st->left_sprite_w  *= 2; st->left_sprite_h  *= 2;
+    st->right_sprite_w *= 2; st->right_sprite_h *= 2;
   }
 }
 
@@ -133,11 +133,11 @@ draw_sprite(struct state *st)
   
   /* check direction */
   if (st->going_right) {
-    frame = &st->right_frames[st->current_frame % NUM_FRAMES];
+    frame = &st->right_frames[st->current_frame % NUM_RIGHT_FRAMES];
     curr_sprite_w = st->right_sprite_w;
     curr_sprite_h = st->right_sprite_h;
   } else {
-    frame = &st->left_frames[st->current_frame % NUM_FRAMES];
+    frame = &st->left_frames[st->current_frame % NUM_LEFT_FRAMES];
     curr_sprite_w = st->left_sprite_w;
     curr_sprite_h = st->left_sprite_h;
   }
@@ -322,9 +322,11 @@ spritesaver_free(Display *dpy, Window window, void *closure)
   struct state *st = (struct state *) closure;
   int i;
   
-  for (i = 0; i < NUM_FRAMES; i++) {
+  for (i = 0; i < NUM_LEFT_FRAMES; i++) {
     if (st->left_frames[i].p) XFreePixmap(dpy, st->left_frames[i].p);
     if (st->left_frames[i].m) XFreePixmap(dpy, st->left_frames[i].m);
+  }
+  for (i = 0; i < NUM_RIGHT_FRAMES; i++) {
     if (st->right_frames[i].p) XFreePixmap(dpy, st->right_frames[i].p);
     if (st->right_frames[i].m) XFreePixmap(dpy, st->right_frames[i].m);
   }

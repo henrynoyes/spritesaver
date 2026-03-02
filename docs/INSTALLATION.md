@@ -10,7 +10,7 @@ sudo apt install xscreensaver ffmpeg
 
 Then clone and run `configure.sh`. This **only needs to be run once** as long as XScreenSaver is not uninstalled.
 ```
-git clone git@github.com:henrynoyes/spritesaver.git
+git clone https://github.com/henrynoyes/spritesaver.git
 cd spritesaver && sudo ./configure.sh
 ```
 

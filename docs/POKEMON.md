@@ -15,18 +15,18 @@ There are many online sources for downloading animated Pokémon sprites. Here ar
 For this example, I'll use the [Aerodactyl](https://pokemondb.net/sprites/aerodactyl) sprite seen in the gallery.
 
 First, place the front and back GIFs in a folder inside `sprites`,
-```
-spritesaver/
-├── autobuild.sh
-├── configure.sh
-├── Dockerfile
-├── sprites/
-│   ├── +aerodactyl/
-│   │   ├── +aerodactyl_back.gif
-│   │   └── +aerodactyl_front.gif
-│   ├── Makefile
-│   └── spritesaver.c
-└── spritesaver.xml
+```diff
+ spritesaver/
+ ├── autobuild.sh
+ ├── configure.sh
+ ├── Dockerfile
+ ├── sprites/
++│   ├── aerodactyl/
++│   │   ├── aerodactyl_back.gif
++│   │   └── aerodactyl_front.gif
+ │   ├── Makefile
+ │   └── spritesaver.c
+ └── spritesaver.xml
 ```
 
 Then, run `autobuild.sh` from the `spritesaver` directory,
@@ -35,26 +35,26 @@ sudo ./autobuild.sh sprites/aerodactyl/aerodactyl_front.gif sprites/aerodactyl/a
 ```
 
 This will generate the sprite images, sprite headers, and compile and install the binary,
-```
-spritesaver/
-├── autobuild.sh
-├── configure.sh
-├── Dockerfile
-├── sprites/
-│   ├── aerodactyl/
-│   │   ├── aerodactyl_back.gif
-│   │   ├── aerodactyl_front.gif
-│   │   ├── +sprite_headers/
-│   │   │   ├── +aerodactyl_back_01_png.h
-│   │   │   └── ...
-│   │   ├── +sprite_images/
-│   │   │   ├── +aerodactyl_back_01.png
-│   │   │   └── ...
-│   │   └── +sprites.h
-│   ├── Makefile
-│   ├── +spritesaver
-│   └── spritesaver.c
-└── spritesaver.xml
+```diff
+ spritesaver/
+ ├── autobuild.sh
+ ├── configure.sh
+ ├── Dockerfile
+ ├── sprites/
+ │   ├── aerodactyl/
+ │   │   ├── aerodactyl_back.gif
+ │   │   ├── aerodactyl_front.gif
++│   │   ├── sprite_headers/
++│   │   │   ├── aerodactyl_back_01_png.h
++│   │   │   └── ...
++│   │   ├── sprite_images/
++│   │   │   ├── aerodactyl_back_01.png
++│   │   │   └── ...
++│   │   └── sprites.h
+ │   ├── Makefile
++│   ├── spritesaver
+ │   └── spritesaver.c
+ └── spritesaver.xml
 ```
 
 To preview the screensaver, either use the XScreenSaver GUI or run the binary directly,
